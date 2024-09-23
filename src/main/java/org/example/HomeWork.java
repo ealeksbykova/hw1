@@ -27,8 +27,20 @@ public class HomeWork {
      * @return количество узлов от 0 до N, где N позиция на которой первый раз условие вернуло fals
      */
     public <T> int partitionBy(Node<T> list, Predicate<T> pred) {
-        //TODO реализовать метод
-        return 0;
+        if(list == null || pred == null) {
+            return -1;
+        }
+
+        int position = 0;
+        while(list != null) {
+            if (Boolean.FALSE.equals((pred.test(list.getValue())))) {
+                return position;
+            }
+            ++position;
+
+            list = list.getNext();
+        }
+        return position;
     }
 
     /**
@@ -41,6 +53,14 @@ public class HomeWork {
      * @return сам элемент
      */
     public <T> T findNthElement(Node<T> list, int n) {
-        return null;
+        if (n < 0 || list == null || n > list.getSize() - 1) {
+            return null;
+        }
+
+        for(int i = 0; i < n; ++i) {
+            list = list.getNext();
+        }
+
+        return list.getValue();
     }
 }
